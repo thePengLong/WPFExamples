@@ -1,0 +1,38 @@
+﻿<Window x:Class="ListViewExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ListViewExample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="CustomListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <StackPanel x:Name="stackPanel" Height="50" Orientation="Vertical">
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Yield}"></TextBlock>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="stackPanel"  Property="Background" Value="Red"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="stackPanel"  Property="Background" Value="blue"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+                
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ListView ItemContainerStyle="{StaticResource CustomListViewItemStyle}" Width="100" ItemsSource="{Binding Infos}" SelectedItem="{Binding Info}" SelectionChanged="TestChanged" >
+           
+        </ListView>
+    </Grid>
+</Window>
